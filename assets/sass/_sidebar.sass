@@ -3,6 +3,16 @@
         margin-left: 30px
         margin-top: 30px
 .widget
+    background-color: #fff
+    border-radius: 10px
+    &-title
+        padding: 20px 25px
+        border-bottom: 1px solid #D9DADB
+        font-size: 14px
+        line-height: 20px
+        font-family: "Lato Black", 'sans-serif'
+        text-transform: uppercase
+        margin: 0
     &-downloader
         background: #3BBDC4 url('../images/file.svg') no-repeat top 22px right 24px
         border-radius: 10px
@@ -46,3 +56,42 @@
             font-size: 14px
             line-height: 20px
             margin: 0
+    .tagcloud
+        display: flex
+        align-items: center
+        justify-content: flex-start
+        flex-wrap: wrap
+        max-width: 263px
+        padding: 25px
+        padding-bottom: 35px
+    .tag-cloud-link
+        line-height: 20px
+        color: #262D33
+        margin-right: 15px
+        margin-bottom: 10px
+        text-decoration: none
+        padding: 5px 15px
+        border: 1px solid #D9DADB
+        border-radius: 5px
+        font-family: "Lato Black", 'sans-serif'
+    &-social
+        max-width: 263px
+.widget-social
+    margin: 0
+    .widget-title
+        font-family: Roboto Slab
+        font-size: 20px
+        line-height: 25px
+        border-bottom: none
+        padding: 25px 30px 15px
+        text-align: center
+.social-link-tag
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    padding-bottom: 30px
+    padding-top: 20px
+    .social-widget-link
+        width: 40px
+        height: 40px
+        margin: 10px 5px
