@@ -1,7 +1,9 @@
+body
+    counter-reset: section
 .sidebar
     &-front-page
         margin-left: 30px
-        margin-top: 30px
+        width: 23%
 .widget
     background-color: #fff
     border-radius: 10px
@@ -20,6 +22,7 @@
         padding: 25px
         padding-bottom: 55px
         position: relative
+        margin-top: 30px
         .widget
             &-title
                 text-transform: none
@@ -56,6 +59,47 @@
             font-size: 14px
             line-height: 20px
             margin: 0
+    &-recent-posts
+        &-wrapper
+            padding: 0px 25px 17px
+        a
+            display: flex
+            align-items: center
+            text-decoration: none
+            padding-top: 17px
+            padding-bottom: 17px
+            position: relative
+            &:not(:last-child)
+                border-bottom: 1px solid #D9DADB
+            &::before
+                position: absolute
+                counter-increment: section
+                content: counter(section)
+                top:
+                right: 0
+                font-size: 70px
+                line-height: 50px
+                color: #262D33
+                opacity: 0.08
+                font-family: "Lato Black", 'sans-serif'
+                font-style: italic
+
+        img
+            width: 60px
+            height: 60px
+            margin-right: 10px
+        h4
+            font-weight: normal
+            font-size: 14px
+            line-height: 20px
+            color: #4B5157
+            margin-top: 0
+            margin-bottom: 5px
+        span
+            font-size: 12px
+            line-height: 15px
+            color: #939699
+
     .tagcloud
         display: flex
         align-items: center

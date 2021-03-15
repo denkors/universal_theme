@@ -1,4 +1,10 @@
 .post-list
+    display: flex
+    &-item
+        margin: 0
+        padding: 0
+        width: 77%
+
     &-unit
         display: flex
         align-items: center
@@ -10,6 +16,11 @@
         background-color: #fff
         margin: 0
         position: relative
+        &:first-child
+            border-radius: 10px 10px 0px 0px
+        &:last-child
+            border-radius: 0px 0px 10px 10px
+
         &:not(:last-child):after
             content: ""
             position: absolute

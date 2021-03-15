@@ -9,7 +9,8 @@
 
           $myposts = get_posts([ 
             'numberposts' => 1,
-            'category_name' => 'java-script',
+			'offset' =>1,
+			'category_name' => 'java-script',
           ]);
             //проверяем есть ли посты
           if( $myposts ){
@@ -28,7 +29,17 @@
           </div>
         </a>
         <div class="post-text">
-          <?php the_category() ?>
+          <?php 
+		  	foreach ( get_the_category() as $category ) {
+				  printf(
+					  '<a href="%s" class="category-link %s">%s</a>',
+					  esc_url(get_category_link( $category )),
+					  esc_html( $category -> slug ),
+					  esc_html( $category -> name ),
+
+				  );
+			  }
+		  ?>
           <h2 class="post-title"><?php echo mb_strimwidth(get_the_title(), 0, 50, '...') ?></h2>
           <a href="<?php echo get_the_permalink() ?>" class="more">Читать далее</a>      
         </div>
@@ -54,8 +65,7 @@
 
           $myposts = get_posts([ 
             'numberposts' => 5,
-            'offset' => 1,
-            'category_name' => 'java-script,css,html,web-design',
+            'category_name' => 'web-design,css,html',
             
           ]);
             //проверяем есть ли посты
@@ -66,7 +76,17 @@
               ?>
               <!-- Вывода постов, функции цикла: the_title() и т.д. -->
           <li class="post">
-            <?php the_category() ?>
+            <?php 
+				foreach ( get_the_category() as $category ) {
+					printf(
+						'<a href="%s" class="category-link %s">%s</a>',
+						esc_url(get_category_link( $category )),
+						esc_html( $category -> slug ),
+						esc_html( $category -> name ),
+
+					);
+				}
+		   ?>
             <a class="post-permalink" href="<?php echo get_the_permalink() ?>">
               <h4 class="post-title"><?php echo mb_strimwidth(get_the_title(), 0, 60, '...') ?></h4>
             </a>
@@ -252,7 +272,7 @@
         </ul>
         <!-- article list -->
         <!-- Подключаем сайдбар -->
-        <?php get_sidebar();?>
+        <?php get_sidebar('home-top');?>
         
         </div>
 </div>
@@ -285,6 +305,8 @@
 
 	wp_reset_postdata(); // Сбрасываем $post
 ?>
+<!-- investigation -->
+
 <div class="post-list container">
 	<ul class="post-list-item">
             <?php
@@ -306,7 +328,18 @@
             <li class="post-list-unit">
 				 <img width="336" height="195" src="<?php echo get_the_post_thumbnail_url( null,)?> " alt="" class="post-list-image">
 			  <div class="post-list-info">
-				<span class="category-name"> <?php $category = get_the_category(); echo 	$category [0]->name ?> </span>
+				  <!-- $category = get_the_category(); echo 	$category [0]->name -->
+				<span class="category-name"> <?php 
+				foreach ( get_the_category() as $category ) {
+					printf(
+						'<a href="%s" class="category-link %s">%s</a>',
+						esc_url(get_category_link( $category )),
+						esc_html( $category -> slug ),
+						esc_html( $category -> name ),
+
+					);
+				}
+				?> </span>
                   <a class="post-list-permalink" href="<?php echo get_the_permalink() ?>">
                     <h4 class="post-list-title"><?php echo mb_strimwidth(get_the_title(), 0, 75, '...') ?></h4>
                   </a>
@@ -338,5 +371,6 @@
             wp_reset_postdata(); // Сбрасываем $post
             ?>
         </ul>
-
+<!-- Подключаем сайдбар -->
+<?php get_sidebar('home-bottom');?>
 </div>
