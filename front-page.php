@@ -136,6 +136,7 @@
             $query = new WP_Query( [
               //получаем 7 постов
               'posts_per_page' => 7,
+			  'category__not_in' => 23,
               
             ] );
 
@@ -256,3 +257,86 @@
         </div>
 </div>
 <!-- /container -->
+<?php		
+	global $post;
+
+	$query = new WP_Query( [
+		'posts_per_page' => 1,
+		'category_name' => 'investigation',
+	] );
+
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			?>
+			<!-- Вывода постов, функции цикла: the_title() и т.д. -->
+			<section class="investigation" style="background: linear-gradient(0deg, rgba(64, 48, 61, 0.35), rgba(64, 48, 61, 0.35)), url(<?php echo get_the_post_thumbnail_url() ?>) no-repeat center center">
+				<div class="container">
+					<h2 class="investigation-title"><?php the_title(); ?></h2>
+					<a href="<?php echo get_the_permalink() ?>" class="more">Читать статью</a>
+				</div>
+			</section>
+
+			<?php 
+		}
+	} else {
+		// Постов не найдено
+	}
+
+	wp_reset_postdata(); // Сбрасываем $post
+?>
+<div class="post-list container">
+	<ul class="post-list-item">
+            <?php
+            //обьявляем глобальную переменную
+            global $post;
+
+            $myposts = get_posts([ 
+              'numberposts' => 6,
+            
+              
+            ]);
+              //проверяем есть ли посты
+            if( $myposts ){
+              //если есть то запускаем цикл
+              foreach( $myposts as $post ){
+                setup_postdata( $post );
+                ?>
+              <!-- Вывода постов, функции цикла: the_title() и т.д. -->
+            <li class="post-list-unit">
+				 <img width="336" height="195" src="<?php echo get_the_post_thumbnail_url( null,)?> " alt="" class="post-list-image">
+			  <div class="post-list-info">
+				<span class="category-name"> <?php $category = get_the_category(); echo 	$category [0]->name ?> </span>
+                  <a class="post-list-permalink" href="<?php echo get_the_permalink() ?>">
+                    <h4 class="post-list-title"><?php echo mb_strimwidth(get_the_title(), 0, 75, '...') ?></h4>
+                  </a>
+				   <p class="post-list-excerpt">
+                        <?php echo mb_strimwidth(get_the_excerpt(), 0, 165, '...') ?>
+                   </p>
+				<div class="author-info">
+                             <span class="date"><?php the_time( 'j F' );?></span>
+                              <div class="comments">
+                                  <img src="<?php echo get_template_directory_uri(  ) .  './assets/images/comment.svg'?>" alt="icon: comment" class="comments-icon">
+                                  <span class="comments-counter"><?php comments_number('0', '1', '%') ?></span>
+                             </div>
+                             <div class="likes">
+                                  <img src="<?php echo get_template_directory_uri(  ) .  './assets/images/heart-gray.svg'?>" alt="icon: like" class="likes-icon">
+                                  <span class="likes-counter"><?php comments_number('0', '1', '%') ?></span>
+                             </div>
+			    </div>
+			  </div>
+            </li>
+              <?php 
+              }
+            } else {
+              // Постов не найдено
+              ?>
+              <p>Записей нет</p> 
+              <?php
+            }
+
+            wp_reset_postdata(); // Сбрасываем $post
+            ?>
+        </ul>
+
+</div>

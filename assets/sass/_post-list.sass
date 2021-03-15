@@ -1,0 +1,72 @@
+.post-list
+    &-unit
+        display: flex
+        align-items: center
+        justify-content: space-between
+        flex-direction: column
+        width: 848px
+        height: 245px
+        flex-wrap: wrap
+        background-color: #fff
+        margin: 0
+        position: relative
+        &:not(:last-child):after
+            content: ""
+            position: absolute
+            bottom: 0
+            width: 95%
+            height: 1px
+            background-color: #D9DADB
+
+        .author-info
+            display: flex
+            align-items: center
+            margin-top: auto
+            position: absolute
+            bottom: 0
+            .comments
+                margin: 0 10px
+                &-counter
+                    margin-left: 7px
+            .likes
+                &-counter
+                    margin-left: 7px
+
+    &-info
+        display: flex
+        flex-direction: column
+        width: 50%
+        margin-right: 25px
+        position: relative
+        margin-top: 25px
+        height: 190px
+        .category-name
+            font-weight: 900
+            font-size: 12px
+            line-height: 15px
+            letter-spacing: 0.5px
+            text-transform: uppercase
+            color: #4592FF
+            margin-bottom: 15px
+    &-permalink
+        text-decoration: none
+    &-title
+        font-family: Roboto Slab
+        font-style: normal
+        font-weight: bold
+        font-size: 20px
+        line-height: 25px
+        color: #262D33
+        margin: 0
+
+    &-image
+        width: 336px
+        height: 195px
+        object-fit: cover
+        margin: 25px
+    &-excerpt
+        margin: 0
+        margin-top: 10px
+        font-size: 14px
+        line-height: 20px
+        color: #4B5157
