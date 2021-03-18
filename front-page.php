@@ -157,6 +157,7 @@
               //получаем 7 постов
               'posts_per_page' => 7,
 			  'category__not_in' => 23,
+         'category__not_in' => 29,
               
             ] );
 
@@ -186,7 +187,9 @@
                             <span class="author-name"><strong><?php the_author()?></strong> : <?php the_author_meta('description') ?></span>
                           </div>
                             <div class="comments">
-                              <img src="<?php echo get_template_directory_uri(  ) .  './assets/images/comment.svg'?>" alt="icon: comment" class="comments-icon">
+                              <svg width="19" height="15" fill="#BCBFC2" class="icon comments-icon">
+                                <use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#comment"></use>
+                              </svg>
                               <span class="comments-counter"><?php comments_number('0', '1', '%') ?></span>
                             </div>
                         </div>
@@ -217,11 +220,15 @@
                                 <span class="author-name"><strong><?php the_author()?></strong></span>
                                 <span class="date"><?php the_time( 'j F' );?></span>
                                 <div class="comments">
-                                  <img src="<?php echo get_template_directory_uri(  ) .  './assets/images/comment-white.svg'?>" alt="icon: comment" class="comments-icon">
+                                <svg width="19" height="15" fill="#fff" class="icon comments-icon">
+                                <use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#comment"></use>
+                              </svg>
                                   <span class="comments-counter"><?php comments_number('0', '1', '%') ?></span>
                                 </div>
                                 <div class="likes">
-                                  <img src="<?php echo get_template_directory_uri(  ) .  './assets/images/heart.svg'?>" alt="icon: like" class="likes-icon">
+                                   <svg width="19" height="15" fill="#fff" class="icon like-icon">
+                                <use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#heart"></use>
+                              </svg>
                                   <span class="likes-counter"><?php comments_number('0', '1', '%') ?></span>
                                 </div>
                             </div>
@@ -248,7 +255,7 @@
                   default:?>
                   <li class="article-grid-item article-grid-item-default">
                     <a href="<?php the_permalink() ?>" class="article-grid-permalink">
-                      <h4 class="article-grid-title"><?php echo mb_strimwidth(get_the_title(), 0, 40, '...') ?></h4>
+                      <h4 class="article-grid-title"><?php echo mb_strimwidth(get_the_title(), 0, 38, '...') ?></h4>
                       <p class="article-grid-excerpt">
                         <?php echo mb_strimwidth(get_the_excerpt(), 0, 90, '...') ?>
                         </p>
@@ -315,6 +322,7 @@
 
             $myposts = get_posts([ 
               'numberposts' => 6,
+              'category__not_in' => 26,
             
               
             ]);
@@ -326,7 +334,15 @@
                 ?>
               <!-- Вывода постов, функции цикла: the_title() и т.д. -->
             <li class="post-list-unit">
-				 <img width="336" height="195" src="<?php echo get_the_post_thumbnail_url( null,)?> " alt="" class="post-list-image">
+				 <img width="336" height="195" src="<?php 
+            //должно находится внутри цикла
+            if( has_post_thumbnail() ) {
+              echo get_the_post_thumbnail_url();
+            }
+            else {
+              echo get_template_directory_uri( ) . '/assets/images/img-default.png';
+            }
+            ?>"class="post-list-image">
 			  <div class="post-list-info">
 				  <!-- $category = get_the_category(); echo 	$category [0]->name -->
 				<span class="category-name"> <?php 
@@ -349,11 +365,15 @@
 				<div class="author-info">
                              <span class="date"><?php the_time( 'j F' );?></span>
                               <div class="comments">
-                                  <img src="<?php echo get_template_directory_uri(  ) .  './assets/images/comment.svg'?>" alt="icon: comment" class="comments-icon">
+                                  <svg width="19" height="15" fill="#BCBFC2" class="icon comments-icon">
+                                <use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#comment"></use>
+                              </svg>
                                   <span class="comments-counter"><?php comments_number('0', '1', '%') ?></span>
                              </div>
                              <div class="likes">
-                                  <img src="<?php echo get_template_directory_uri(  ) .  './assets/images/heart-gray.svg'?>" alt="icon: like" class="likes-icon">
+                                  <svg width="19" height="15" fill="#BCBFC2" class="icon like-icon">
+                                <use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#heart"></use>
+                              </svg>
                                   <span class="likes-counter"><?php comments_number('0', '1', '%') ?></span>
                              </div>
 			    </div>
@@ -374,3 +394,162 @@
 <!-- Подключаем сайдбар -->
 <?php get_sidebar('home-bottom');?>
 </div>
+<div class="special">
+    <div class="container">
+            <div class="special-grid">
+                <?php		
+                    global $post;
+
+                    $query = new WP_Query( [
+                      'posts_per_page' => 1,
+                      'category_name' => 'photo-report',
+                    ] );
+
+                    if ( $query->have_posts() ) {
+                      while ( $query->have_posts() ) {
+                        $query->the_post();
+                        ?>
+                        <div class="photo-report">
+                          <!-- Slider main container -->
+                          <div class="swiper-container photo-report-slider">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                              <!-- Slides -->
+                              <?php $images = get_attached_media( 'image'); 
+                                foreach ($images as $image ) {
+                                  echo '<div class="swiper-slide"><img src=" ';
+                                  print_r($image -> guid);
+                                  echo '"></div>';
+                                }
+                             ?>
+                            </div>
+                            <!-- If we need pagination -->
+                            <div class="swiper-pagination"></div>
+                          </div>
+                            <div class="photo-report-content">
+                                 <?php 
+                            foreach ( get_the_category() as $category ) {
+                              printf(
+                                '<a href="%s" class="category-link">%s</a>',
+                                esc_url(get_category_link( $category )),
+                                esc_html( $category -> name ),
+
+                              );
+                            }
+				                    ?>
+                            <?php $author_id = get_the_author_meta('ID'); ?>
+                            <a href="<?php echo get_author_posts_url($author_id) ?>" class="author">
+                              <img src="<?php echo get_avatar_url($author_id) ?>" alt="" class="author-avatar">
+                              <div class="author-bio">
+                                <span class="author-name"><?php the_author() ?></span>
+                                <span class="author-rank">Должность</span>
+                              </div>
+                              </a>
+                            <!-- author -->
+                            <h3 class="photo-report-title"><?php the_title() ?></h3>
+                              <a href="<?php echo get_the_permalink() ?>" class="button photo-report-button">
+                              <svg width="19" height="15" class="icon photo-report-icon">
+                                <use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#images"></use>
+                              </svg>
+                              View photo
+                              <span class="photo-report-counter"><?php echo count($images); ?></span>
+                              </a>
+                            </div>
+                        </div>
+              <!-- photo-report -->
+                        <?php 
+                      }
+                    } else {
+                      // Постов не найдено
+                    }
+
+                    wp_reset_postdata(); // Сбрасываем $post
+                  ?>
+              <div class="other">
+                <div class="career-post">
+                  <?php
+                    //обьявляем глобальную переменную
+                    global $post;
+
+                    $myposts = get_posts([ 
+                      'numberposts' => 1,
+                      'category_name' => 'career',                     
+                    ]);
+                      //проверяем есть ли посты
+                    if( $myposts ){
+                      //если есть то запускаем цикл
+                      foreach( $myposts as $post ){
+                        setup_postdata( $post );
+                        ?>
+                      <!-- Вывода постов, функции цикла: the_title() и т.д. -->
+                     <?php foreach ( get_the_category() as $category ) {
+                              printf(
+                                '<a href="%s" class="category-link">%s</a>',
+                                esc_url(get_category_link( $category )),
+                                esc_html( $category -> name ),
+
+                              );
+                            }
+                            ?>
+                    <h3 class="career-post-title"><?php the_title() ?></h3>
+                    <p class="career-post-excerpt">
+                      <?php echo mb_strimwidth(get_the_excerpt(), 0, 90, '...') ?>
+                    </p>
+                    <a href="<?php echo get_the_permalink() ?>" class="more">Читать далее</a>
+                      <?php 
+                      }
+                    } else {
+                      // Постов не найдено
+                      ?>
+                      <p>Записей нет</p> 
+                      <?php
+                    }
+
+                    wp_reset_postdata(); // Сбрасываем $post
+                    ?>
+                </div>
+                <!-- /.career-post -->
+                <div class="other-posts">
+                  <?php
+                    //обьявляем глобальную переменную
+                    global $post;
+
+                    $myposts = get_posts([ 
+                      'numberposts' => 2,
+                      'category__not_in' => 26,
+                      'category__not_in' => 29,                   
+                    ]);
+                      //проверяем есть ли посты
+                    if( $myposts ){
+                      //если есть то запускаем цикл
+                      foreach( $myposts as $post ){
+                        setup_postdata( $post );
+                        ?>
+                      <!-- Вывода постов, функции цикла: the_title() и т.д. -->
+                    <a href="<?php echo get_the_permalink() ?>" class="other-post other-post-default">
+                      <h4 class="other-post-title"><?php echo mb_strimwidth(get_the_title(), 0, 24, '...') ?></h4>
+                      <p class="other-post-excerpt"><?php echo mb_strimwidth(get_the_excerpt(), 0, 70, '...') ?></p>
+                      <span class="other-post-date"><?php the_time( 'j F Y' );?></span>
+                    </a>
+                      <?php 
+                      }
+                    } else {
+                      // Постов не найдено
+                      ?>
+                      <p>Записей нет</p> 
+                      <?php
+                    }
+
+                    wp_reset_postdata(); // Сбрасываем $post
+                    ?>
+                </div>
+              <!-- /.other-posts -->
+              </div>
+              <!-- other -->
+            </div>
+            <!-- special-grid -->
+    </div>
+    <!-- container -->
+</div>
+<!-- special -->
+<?php wp_footer(); ?>

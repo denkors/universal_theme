@@ -405,7 +405,15 @@ class Recent_Posts_Widget extends WP_Widget {
 				setup_postdata($post);
 			?>
 			<a href="<?php the_permalink( ) ?>" class="recent-post-link">
-			<img src="<?php echo get_the_post_thumbnail_url( null, 'homepage-thumb')?>" alt="">
+			<img src="<?php 
+            //должно находится внутри цикла
+            if( has_post_thumbnail() ) {
+              echo get_the_post_thumbnail_url(null, 'homepage-thumb');
+            }
+            else {
+              echo get_template_directory_uri( ) . '/assets/images/img-default.png';
+            }
+            ?>" alt="">
 				<div class="recent-post-info">
 					<h4><?php echo mb_strimwidth(get_the_title(), 0, 35, '...'); ?></h4>
 					<span class="recent-post-time">
@@ -501,8 +509,12 @@ add_action( 'widgets_init', 'register_recent_posts_widget' );
 //подключение стилей и скриптов
 function enqueue_universal_style() {
 	wp_enqueue_style( 'style', get_stylesheet_uri() );
+   wp_enqueue_style( 'swiper-slider', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css', 'style', time());
   wp_enqueue_style( 'universal_theme', get_template_directory_uri() . '/assets/css/universal-theme.css', 'style' );
   wp_enqueue_style( 'Roboto Slab', 'https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+
+   wp_enqueue_script( 'swiper',  get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', null, time(),true);
+    wp_enqueue_script( 'scripts',  get_template_directory_uri() . '/assets/js/scripts.js', 'swiper', time(),true);
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_universal_style' );
 //с помощью фильтра изменили настройки облака тегов
