@@ -76,6 +76,17 @@ function universal_theme_widgets_init() {
 			'after_title'   => '',
 		)
 	);
+			register_sidebar(
+				array(
+				'name'          => esc_html__( 'Записи в подвале поста', 'universal_example' ),
+				'id'            => 'sidebar-footer-posts',
+				'description'   => esc_html__( 'Добавьте сюда виджет свежих записейы', 'universal_example' ),
+				'before_widget' => '<section id="%1$s" class="sidebar-footer-posts %2$s">',
+				'after_widget'  => '</section>',
+				'before_title'  => '',
+				'after_title'   => '',
+		)
+	);
 }
 add_action( 'widgets_init', 'universal_theme_widgets_init' );
 
@@ -526,6 +537,8 @@ function register_recent_posts_widget() {
 	register_widget( 'Recent_Posts_Widget' );
 }
 add_action( 'widgets_init', 'register_recent_posts_widget' );
+
+
 
 
 //подключение стилей и скриптов

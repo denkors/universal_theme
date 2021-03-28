@@ -148,7 +148,10 @@
 				printf( '<span class="tags-links">' . esc_html__( 'Теги: %1$s', 'universal_theme' ) . '</span>', $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			} ?>
 	</div><!-- .entry-content -->
-    <footer class="entry-footer">
-    
+    <footer class="entry-footer container">
+			<!-- ссылки на соц сети -->
+			<?php meks_ess_share();?>
+			
 	</footer><!-- .entry-footer -->
+	<?php get_sidebar('footer-posts'); ?>
 </article>

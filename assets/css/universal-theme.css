@@ -1377,7 +1377,7 @@ body {
 }
 
 .photo-report {
-  min-height: 570px;
+  max-height: 570px;
   width: 49%;
   position: relative;
   overflow: hidden;
@@ -1875,6 +1875,7 @@ body {
 
 .post-content {
   padding-top: 68px;
+  padding-bottom: 30px;
 }
 
 .post-content p:first-child {
@@ -2038,6 +2039,32 @@ body {
   opacity: 0.85;
 }
 
+.post .tags-links {
+  padding-bottom: 60px;
+  border-bottom: 1px solid #d9dadb;
+  display: block;
+  max-width: 623px;
+  width: 100%;
+}
+
+.post .tags-links a {
+  color: #262D33;
+  border: 1px solid #D9DADB;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  font-family: Lato black,sans-serif;
+  margin: 0 10px;
+}
+
+.post .tags-links a:visited {
+  color: #262D33;
+}
+
 .post-header-title-wrapper {
   position: relative;
 }
@@ -2054,4 +2081,73 @@ body {
   width: 30px;
   height: 30px;
   fill: #BCBFC2;
+}
+
+.meks_ess {
+  max-width: 623px;
+  margin-top: 0;
+}
+
+.meks_ess_share_label {
+  font-size: 25px;
+  line-height: 30px;
+  font-family: Roboto Slab,sans-serif;
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+.footer-posts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-top: 60px;
+}
+
+.footer-posts a {
+  color: #262D33;
+}
+
+.footer-posts a:visited {
+  color: #262D33;
+}
+
+.footer-posts-wrapper {
+  width: 100%;
+  height: 425px;
+  background: #F5F5F5;
+}
+
+.footer-posts-image {
+  width: 263px;
+  height: 180px;
+  border-radius: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.footer-posts-title {
+  width: 263px;
+  margin-top: 15px;
+  font-family: Roboto Slab;
+  margin-bottom: 15px;
+}
+
+.footer-posts-link {
+  text-decoration: none;
+}
+
+.footer-posts-info {
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.footer-posts-info svg {
+  margin-right: 5px;
+}
+
+.footer-posts-info .eyes-counter {
+  margin-right: 10px;
 }
