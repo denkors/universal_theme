@@ -1,16 +1,35 @@
+// .post-list
+//     &-item
+//         width: 74%
+//     &-unit
+//         display: flex
+//         align-items: center
+//         background-color: #fff
+//         padding-left: 25px
+//     &-image
+//         width: 336px
+//         height: 195px
+//         object-fit: cover
+//     &-info
+//         margin-top: 30px
+// .author-info
+//     display: flex
+//     width: 100%
+// .date,.likes,.comments
+//     margin-right: 8px
+
 .post-list
     display: flex
     &-item
         margin: 0
-        padding: 0
-        width: 77%
+        width: 100%
 
     &-unit
         display: flex
         align-items: center
         justify-content: space-between
         flex-direction: column
-        width: 848px
+        width: 95%
         height: 245px
         flex-wrap: wrap
         background-color: #fff
@@ -71,8 +90,8 @@
         margin: 0
 
     &-image
-        width: 336px
-        height: 195px
+        width: 40%
+        height: 80%
         object-fit: cover
         margin: 25px
     &-excerpt
@@ -81,3 +100,19 @@
         font-size: 14px
         line-height: 20px
         color: #4B5157
+@media screen and ( max-width:1200px  )
+    .post-list
+        flex-wrap: wrap
+        &-title
+            font-size: 16px
+        &-excerpt
+            font-size: 12px
+            margin: 0
+        .sidebar-front-page
+            width: 100%
+            margin: 30px
+@media screen and ( max-width:960px  )
+    .post-list-item
+        width: 100%
+    .sidebar-front-page
+        margin: 30px

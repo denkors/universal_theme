@@ -334,7 +334,7 @@
                 ?>
               <!-- Вывода постов, функции цикла: the_title() и т.д. -->
             <li class="post-list-unit">
-				 <img width="336" height="195" src="<?php 
+				 <img src="<?php 
             //должно находится внутри цикла
             if( has_post_thumbnail() ) {
               echo get_the_post_thumbnail_url();
@@ -357,10 +357,10 @@
 				}
 				?> </span>
                   <a class="post-list-permalink" href="<?php echo get_the_permalink() ?>">
-                    <h4 class="post-list-title"><?php echo mb_strimwidth(get_the_title(), 0, 75, '...') ?></h4>
+                    <h4 class="post-list-title"><?php echo mb_strimwidth(get_the_title(), 0, 60, '...') ?></h4>
                   </a>
 				   <p class="post-list-excerpt">
-                        <?php echo mb_strimwidth(get_the_excerpt(), 0, 165, '...') ?>
+                        <?php echo mb_strimwidth(get_the_excerpt(), 0, 120, '...') ?>
                    </p>
 				<div class="author-info">
                              <span class="date"><?php the_time( 'j F' );?></span>

@@ -59,6 +59,8 @@
     &-nav
         display: flex
         align-items: center
+        &-wrapper
+            margin-right: auto
     &-social
         display: flex
     &-text
@@ -72,3 +74,30 @@
             p
                 margin-top: 0
                 margin-bottom: 25px
+@media screen and ( max-width: 1024px )
+    .footer
+        &-menu
+            flex-basis: 30%
+@media screen and ( max-width: 960px )
+    .footer
+        &-menu
+            flex-basis: 50%
+            margin-bottom: 20px
+        &-bar
+            flex-wrap: wrap
+        &-info
+            flex-wrap: wrap
+        &-social
+            margin-top: 30px
+        &-text
+        &-wrapper
+            flex-direction: column
+@media screen and ( max-width: 576px )
+    .footer
+        &-menu
+            flex-basis: 100%
+            margin-bottom: 20px
+        &-nav
+            flex-direction: column
+            align-items: flex-start
+            margin-left: 10px

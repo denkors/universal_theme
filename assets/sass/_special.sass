@@ -151,5 +151,25 @@
             font-size: 12px
             line-height: 15px
             color: #6E99AE
-
-// <img width="336" height="195" src="<?php echo get_the_post_thumbnail_url( null,)?> " alt="" class="post-list-image">
+@media screen and ( max-width: 1024px )
+    .special
+        &-grid
+            flex-wrap: wrap
+    .photo-report
+        width: 100%
+        margin-bottom: 20px
+    .other
+        width: 100%
+@media screen and ( max-width: 576px )
+    .photo-report
+        min-height: 400px
+        &-title
+            font-size: 24px
+            line-height: 1.4
+    .career-post
+        background-image: none
+    .other
+        &-posts
+            flex-direction: column
+        &-post
+            width: 100%
