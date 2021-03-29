@@ -11,14 +11,14 @@
 <div class="footer-posts-wrapper">
         <div class="footer-posts container">
                     <?php 
+                                                
                                                
-                                                $cat_id = get_query_var('cat');
                                                 $posts = get_posts( array(
                                     'numberposts' => '4',
-                                    'category'    => array ($cat_id,'cat'),
+                                    'category'    => '',
                                     'orderby'     => 'date',
                                     'include'     => array(),
-                                    'exclude'     => '<?php the_ID() ?>',
+                                    'exclude'     => '$id_post',
                                     'post_type'   => 'post',
 
                                 ) );

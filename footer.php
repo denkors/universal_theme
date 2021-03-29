@@ -1,5 +1,24 @@
     <footer class="footer">
       <div class="container">
+                <div class="footer-form-wrapper">
+                  <h3 class="footer-form-title">
+                  Подпишитесь на нашу рассылку
+                  </h3>
+                  <form action="https://app.getresponse.com/add_subscriber.html" accept-charset="utf-8" method="post">
+                    <!-- Поле Email (обязательно) -->
+                    <input required type="email" name="email" placeholder="Введите email" class="input footer-form-input"/>
+                    <!-- Токен списка -->
+                    <!-- Получить API ID на: https://app.getresponse.com/campaign_list.html -->
+                    <input type="hidden" name="campaign_token" value="BHON8" />
+                    <!-- Добавить подписчика в цикл на определенный день (по желанию) -->
+                    <!-- Страница благодарности (по желанию) -->
+	                  <input type="hidden" name="thankyou_url" value="<?php echo home_url('thankyou');?>"/>
+                    <input type="hidden" name="start_day" value="0" />
+                    <!-- Кнопка подписаться -->
+                    <button class="footer-form-button" type="submit">Подписаться</button>
+                  </form>
+                </div>
+                <!-- footer form wrapper -->
           <div class="footer-menu-bar">
             <?php dynamic_sidebar( 'sidebar-footer' ); ?>
         </div>
