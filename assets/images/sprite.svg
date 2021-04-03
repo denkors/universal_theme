@@ -11,9 +11,11 @@
   <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17" id="download">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M16 12.426c0-.237.263-.426.5-.426s.5.189.5.426v4.134a.44.44 0 01-.432.44H.426A.435.435 0 010 16.56v-4.134C0 12.19.263 12 .5 12s.5.189.5.426V16h15v-3.574zM9 0v10h3l-3.5 4L5 10h3V0h1z"></path>
   </symbol>
-  <symbol  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="arrow">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M3 10v1h11v3l4-3.5L14 7v3H3z" ></path>
+<svg width="0" height="0" class="hidden">
+  <symbol  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 7" id="arrow">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M15 3v1H4v3L0 3.5 4 0v3h11z" ></path>
   </symbol>
+</svg>
   <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 17" id="home">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M2 17h5v-6h4v6h5v-7h2L9 0 0 10h2v7z" ></path>
   </symbol>

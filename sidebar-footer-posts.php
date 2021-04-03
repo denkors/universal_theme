@@ -12,10 +12,12 @@
         <div class="footer-posts container">
                     <?php 
                                                 
-                                               
+                                               $category = get_the_category($post->ID);
+                                                $current_cat_id = $category[0]->cat_ID;
+                                                $current_cat_name = $category[0]->name;
                                                 $posts = get_posts( array(
                                     'numberposts' => '4',
-                                    'category'    => '',
+                                    'category'    => $current_cat_id,
                                     'orderby'     => 'date',
                                     'include'     => array(),
                                     'exclude'     => '$id_post',

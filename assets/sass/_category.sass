@@ -1,0 +1,63 @@
+.category
+    &-title
+        font-family: Roboto Slab
+        font-size: 40px
+        line-height: 50px
+.posts
+    &-list
+        display: flex
+        flex-wrap: wrap
+    &-card
+        width: 23%
+        margin-bottom: 30px
+        background: #FFFFFF
+        border-radius: 10px
+        overflow: hidden
+        margin-right: 2%
+        &-thumb
+            height: 180px
+            object-fit: cover
+            width: 100%
+        &-text
+            padding: 15px 25px 25px 25px
+            p
+                font-size: 14px
+                line-height: 20px
+        &-title
+            font-size: 16px
+            line-height: 25px
+            font-family: Roboto Slab
+            margin-top: 0
+            margin-bottom: 5px
+        .author
+            display: flex
+            align-items: center
+            &-avatar
+                width: 45px
+                height: 45px
+                border-radius: 50%
+            &-info
+                display: flex
+                flex-wrap: wrap
+                margin-left: 10px
+                color: #939699
+                align-items: center
+                svg
+                    fill: #BCBFC2
+                    margin-left: 5px
+                .comments, .likes, .date
+                    display: flex
+                    align-items: center
+
+            &-name
+                font-size: 14px
+                line-height: 20px
+                color: #4B5157
+            &-name
+                width: 100%
+    &-pagination
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        .navigation
