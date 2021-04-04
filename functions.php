@@ -21,7 +21,52 @@ if ( ! function_exists( 'universal_theme_setup' ) ) :
 		  'header_menu' => 'Меню в шапке',
 		  'footer_menu' => 'Меню в подвале'
     ]);
-  }
+  
+
+add_action( 'init', 'register_post_types' );
+function register_post_types(){
+	register_post_type( 'lesson', [
+		'label'  => null,
+		'labels' => [
+			'name'               => 'Уроки', // основное название для типа записи
+			'singular_name'      => 'Урок', // название для одной записи этого типа
+			'add_new'            => 'Добавить урок', // для добавления новой записи
+			'add_new_item'       => 'Добавление урока', // заголовка у вновь создаваемой записи в админ-панели.
+			'edit_item'          => 'Редактирование урока', // для редактирования типа записи
+			'new_item'           => 'Новый урок', // текст новой записи
+			'view_item'          => 'Смотреть урок', // для просмотра записи этого типа.
+			'search_items'       => 'Искать уроки', // для поиска по этим типам записи
+			'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+			'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+			'parent_item_colon'  => '', // для родителей (у древовидных типов)
+			'menu_name'          => 'Уроки', // название меню
+		],
+		'description'         => 'Раздел с видеоуроками',
+		'public'              => true,
+		// 'publicly_queryable'  => null, // зависит от public
+		// 'exclude_from_search' => null, // зависит от public
+		// 'show_ui'             => null, // зависит от public
+		// 'show_in_nav_menus'   => null, // зависит от public
+		'show_in_menu'        => true, // показывать ли в меню адмнки
+		// 'show_in_admin_bar'   => null, // зависит от show_in_menu
+		'show_in_rest'        => true, // добавить в REST API. C WP 4.7
+		'rest_base'           => null, // $post_type. C WP 4.7
+		'menu_position'       => 5,
+		'menu_icon'           => 'dashicons-welcome-learn-more',
+		'capability_type'   => 'post',
+		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+		'hierarchical'        => false,
+		'supports'            => [ 'title', 'editor', 'thumbnail', 'custom-fields'], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => [],
+		'has_archive'         => true,
+		'rewrite'             => true,
+		'query_var'           => true,
+	] );
+}
+
+
+}
 endif;
 add_action( 'after_setup_theme', 'universal_theme_setup' );
 
@@ -556,6 +601,47 @@ function enqueue_universal_style() {
     wp_enqueue_script( 'scripts',  get_template_directory_uri() . '/assets/js/scripts.js', 'swiper', time(),true);
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_universal_style' );
+
+
+// Подключаем локализацию в самом конце подключаемых к выводу скриптов, чтобы скрипт
+// 'twentyfifteen-script', к которому мы подключаемся, точно был добавлен в очередь на вывод.
+// Заметка: код можно вставить в любое место functions.php темы
+add_action( 'wp_enqueue_scripts', 'adminAjax_data', 99 );
+function adminAjax_data(){
+
+	// Первый параметр 'twentyfifteen-script' означает, что код будет прикреплен к скрипту с ID 'twentyfifteen-script'
+	// 'twentyfifteen-script' должен быть добавлен в очередь на вывод, иначе WP не поймет куда вставлять код локализации
+	// Заметка: обычно этот код нужно добавлять в functions.php в том месте где подключаются скрипты, после указанного скрипта
+	wp_localize_script( 'jquery', 'adminAjax',
+		array(
+			'url' => admin_url('admin-ajax.php')
+		)
+	);
+
+}
+
+add_action( 'wp_ajax_contacts_form', 'ajax_form' );
+add_action( 'wp_ajax_nopriv_contacts_form', 'ajax_form' );
+function ajax_form() {
+	$contact_name = $_POST['contact_name'];
+	$contact_email = $_POST['contact_email'];
+	$contact_comment = $_POST['contact_comment'];
+	$message = 'Пользователь оставил' . $contact_name;
+	
+	$headers = 'From: Denis Korsukov <denoff.01@gmail.com>' . "\r\n";
+
+	$send_message = wp_mail('drugdendiller@gmail.com', 'Новая заявка', $message, $headers,);
+	if ($send_message) {
+		echo 'OK';
+	} else {
+		echo 'NOT';
+	}
+
+	// выход нужен для того, чтобы в ответе не было ничего лишнего, только то что возвращает функция
+	wp_die();
+}
+
+
 //с помощью фильтра изменили настройки облака тегов
 add_filter( 'widget_tag_cloud_args','edit_widget_tag_cloud_args');
 function edit_widget_tag_cloud_args($args) {

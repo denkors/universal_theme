@@ -254,9 +254,9 @@ progress {
 /**
  * Remove the default vertical scrollbar in IE 10+.
  */
-textarea {
+/* textarea {
   overflow: auto;
-}
+} */
 
 /**
  * 1. Add the correct box sizing in IE 10.
@@ -356,9 +356,9 @@ html {
 
 /* Typography
 --------------------------------------------- */
-body,
+/*body,
 /* button, */
-input,
+/* input,
 select,
 optgroup,
 textarea {
@@ -367,7 +367,7 @@ textarea {
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-}
+} */
 
 h1,
 h2,
@@ -531,7 +531,7 @@ input[type="submit"] {
   padding: 0.6em 1em 0.4em;
 } */
 
-button:hover,
+/* button:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
@@ -596,7 +596,7 @@ select {
 
 textarea {
   width: 100%;
-}
+} */
 
 /*--------------------------------------------------------------
 # Layouts
