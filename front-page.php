@@ -156,6 +156,7 @@
             $query = new WP_Query( [
               //получаем 7 постов
               'posts_per_page' => 7,
+        'category_name' => 'articles,css',
 			  'category__not_in' => 23,
          'category__not_in' => 29,
               

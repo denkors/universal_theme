@@ -32,7 +32,7 @@
 								} else {
 									echo 'dont work';
 								}
-
+								
 							?>
 						</div>
 				<div class="lesson-header-title-wrapper">

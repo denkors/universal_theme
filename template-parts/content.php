@@ -10,7 +10,7 @@
             }
             ?>
 
-    )">
+    ) center/100% no-repeat ">
 		<div class="container">
        
 			<div class="post-header-wrapper">

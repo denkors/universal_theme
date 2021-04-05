@@ -1,7 +1,18 @@
-<?php get_header(); ?>
-    <div class="container">
+<?php
+/**
+ * The template for displaying archive pages
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package lesser
+ */
+
+get_header();
+?>
+
+<div class="container">
         <h1 class="category-title">
-            <?php single_cat_title(); ?></h1>
+            <?php single_term_title('Видеоуроки по теме: '); ?></h1>
             <div class="posts-list">
                 <?php while ( have_posts() ){ the_post(); ?>
                     <div class="posts-card">
@@ -62,4 +73,6 @@
             </div>
             <!-- posts-list -->
     </div>
-<?php get_footer(); ?>
+
+<?php
+get_footer();

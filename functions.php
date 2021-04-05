@@ -7,7 +7,7 @@ if ( ! function_exists( 'universal_theme_setup' ) ) :
     add_theme_support( 'title-tag' );
 
     //добвление миниатюр
-    add_theme_support( 'post-thumbnails', array( 'post' ) ); 
+    add_theme_support( 'post-thumbnails', array( 'post','lesson') ); 
 
     //логотип 
     add_theme_support( 'custom-logo', [
@@ -65,6 +65,59 @@ function register_post_types(){
 	] );
 }
 
+// хук, через который подключается функция
+// регистрирующая новые таксономии (create_lesson_taxonomies)
+add_action( 'init', 'create_lesson_taxonomies' );
+
+// функция, создающая 2 новые таксономии "genres" и "authors" для постов типа "lesson"
+function create_lesson_taxonomies(){
+
+	// Добавляем древовидную таксономию 'genre' (как категории)
+	register_taxonomy('genre', array('lesson'), array(
+		'hierarchical'  => true,
+		'labels'        => array(
+			'name'              => _x( 'Genres', 'taxonomy general name' ),
+			'singular_name'     => _x( 'Genre', 'taxonomy singular name' ),
+			'search_items'      =>  __( 'Search Genres' ),
+			'all_items'         => __( 'All Genres' ),
+			'parent_item'       => __( 'Parent Genre' ),
+			'parent_item_colon' => __( 'Parent Genre:' ),
+			'edit_item'         => __( 'Edit Genre' ),
+			'update_item'       => __( 'Update Genre' ),
+			'add_new_item'      => __( 'Add New Genre' ),
+			'new_item_name'     => __( 'New Genre Name' ),
+			'menu_name'         => __( 'Genre' ),
+		),
+		'show_ui'       => true,
+		'query_var'     => true,
+		'rewrite'       => array( 'slug' => 'the_genre' ), // свой слаг в URL
+	));
+
+	// Добавляем НЕ древовидную таксономию 'teacher' (как метки)
+	register_taxonomy('teacher', 'lesson',array(
+		'hierarchical'  => false,
+		'labels'        => array(
+			'name'                        => _x( 'teachers', 'taxonomy general name' ),
+			'singular_name'               => _x( 'teacher', 'taxonomy singular name' ),
+			'search_items'                =>  __( 'Search teachers' ),
+			'popular_items'               => __( 'Popular teachers' ),
+			'all_items'                   => __( 'All teachers' ),
+			'parent_item'                 => null,
+			'parent_item_colon'           => null,
+			'edit_item'                   => __( 'Edit teacher' ),
+			'update_item'                 => __( 'Update teacher' ),
+			'add_new_item'                => __( 'Add New teacher' ),
+			'new_item_name'               => __( 'New teacher Name' ),
+			'separate_items_with_commas'  => __( 'Separate teachers with commas' ),
+			'add_or_remove_items'         => __( 'Add or remove teachers' ),
+			'choose_from_most_used'       => __( 'Choose from the most used teachers' ),
+			'menu_name'                   => __( 'teachers' ),
+		),
+		'show_ui'       => true,
+		'query_var'     => true,
+		'rewrite'       => array( 'slug' => 'the_teacher' ), // свой слаг в URL
+	));
+}
 
 }
 endif;
@@ -648,7 +701,7 @@ function edit_widget_tag_cloud_args($args) {
 	$args['unit'] = 'px';
 	$args['smallest'] = '14';
 	$args['largest'] = '14';
-	$args['number'] = '10';
+	$args['number'] = '12';
 	return $args;
 }
 
